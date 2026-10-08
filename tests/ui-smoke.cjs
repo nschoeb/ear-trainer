@@ -1,13 +1,15 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
+const targetUrl = process.argv[2];
 app.setPath('userData', path.join(app.getPath('temp'), 'ear-trainer-smoke'));
 app.whenReady().then(async () => {
   const win = new BrowserWindow({ show: false, width: 1180, height: 900, webPreferences: { sandbox: true, contextIsolation: true, nodeIntegration: false } });
   const errors = [];
   win.webContents.on('console-message', (_event, details) => { if (details.level === 'error') errors.push(details.message); });
   try {
-    await win.loadFile(path.join(__dirname, '..', 'index.html'));
+    const loadApp = () => targetUrl ? win.loadURL(targetUrl) : win.loadFile(path.join(__dirname, '..', 'index.html'));
+    await loadApp();
     const result = await win.webContents.executeJavaScript(`(async () => {
       function check(condition, message) { if (!condition) throw Error(message); }
       stats = { correct: 0, total: 0, streak: 0 };
@@ -30,7 +32,7 @@ app.whenReady().then(async () => {
       return 'Audio scheduling, scoring, replay, difficulty, and storage passed.';
     })()`);
     console.log(result);
-    await win.loadFile(path.join(__dirname, '..', 'index.html'));
+    await loadApp();
     const persisted = await win.webContents.executeJavaScript("stats.total === 2 && preferences.level === 'advanced'");
     if (!persisted) throw Error('Progress did not survive reload');
     console.log('Persistence after reload passed.');

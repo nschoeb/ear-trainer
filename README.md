@@ -1,6 +1,17 @@
 # Ear Trainer
 
-An offline Electron app for interval recognition. Hear two synthesized notes, select their interval, and track accuracy and streaks.
+An ear-training app for browsers and Electron. Hear two synthesized notes, select their interval, and track accuracy and streaks.
+
+## Try it online
+
+[Open Ear Trainer](https://nschoeb.github.io/ear-trainer/)
+
+No installation or account needed. Click **Play interval** to enable audio.
+Progress is saved in the current browser on the current device; it does not sync between devices or with Electron.
+The web version needs a connection to load; audio is generated locally afterward.
+
+The browser app deploys automatically to GitHub Pages when changes are pushed to `main`.
+Only the four browser assets are published by `.github/workflows/pages.yml`.
 
 ## Run
 
