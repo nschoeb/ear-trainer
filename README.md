@@ -4,7 +4,7 @@ An ear-training app for browsers and Electron. Hear two synthesized notes, selec
 
 ## Try it online
 
-[Open Ear Trainer](https://nschoeb.github.io/ear-trainer/)
+[Open Ear Trainer](https://nschoeb.com/ear-trainer/)
 
 No installation or account needed. Click **Play interval** to enable audio.
 Progress is saved in the current browser on the current device; it does not sync between devices or with Electron.
